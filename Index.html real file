@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataInsights Pro</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        :root {
+            --primary-blue: #0052cc;
+            --dark-blue: #003d99;
+            --light-blue: #e6f0ff;
+        }
+
+        body {
+            background-color: white;
+        }
+
+        nav {
+            background-color: white;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .nav-links a {
+            color: black;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            background-color: white;
+            color: var(--primary-blue);
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .features {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .demo-section {
+            background-color: var(--light-blue);
+            padding: 4rem 2rem;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .demo-container h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: black;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .demo-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .demo-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .demo-card canvas {
+            width: 100% !important;
+            height: 200px !important;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background-color: black;
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-info, .social-media {
+            text-align: center;
+        }
+
+        .contact-info h3, .social-media h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info a, .social-media a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover, .social-media a:hover {
+            color: var(--light-blue);
+        }
+
+        .social-media-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-media-links a {
+            font-size: 1.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">DataInsights Pro</div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#demo">Demo</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Transform Your Data into Insights</h1>
+        <p>Powerful analytics tools that help you make better decisions with your data</p>
+        <a href="#demo" class="cta-button">See it in Action</a>
+    </section>
+
+    <section class="features" id="features">
+        <div class="feature-card" data-aos="fade-up">
+            <h3>Advanced Analytics</h3>
+            <p>Leverage powerful algorithms to uncover hidden patterns and trends in your data with our advanced analytics capabilities.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+            <h3>Real-time Insights</h3>
+            <p>Monitor your data in real-time with interactive dashboards and receive instant alerts on important metrics.</p>
+        </div>
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+            <h3>Custom Reports</h3>
+            <p>Create beautiful, customized reports that tell your data story effectively to any audience.</p>
+        </div>
+    </section>
+
+    <section class="demo-section" id="demo">
+        <div class="demo-container">
+            <h2>Interactive Demo</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h3>Revenue Trends</h3>
+                    <canvas id="revenueChart"></canvas>
+                    <p>Interactive visualization of revenue patterns with automatic trend detection</p>
+                </div>
+                <div class="demo-card">
+                    <h3>User Engagement</h3>
+                    <canvas id="engagementChart"></canvas>
+                    <p>Real-time monitoring of user activity and engagement metrics</p>
+                </div>
+                <div class="demo-card">
+                    <h3>Performance Metrics</h3>
+                    <canvas id="performanceChart"></canvas>
+                    <p>Key performance indicators with predictive analysis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="contact-info">
+                <h3>Contact Us</h3>
+                <p><a href="mailto:oluwaseyiabati66@gmail.com">oluwaseyiabati66@gmail.com</a></p>
+                <p><a href="tel:+2349156303920">+234 915 630 3920</a></p>
+            </div>
+            <div class="social-media">
+                <h3>Follow Us</h3>
+                <div class="social-media-links">
+                    <a href="https://www.instagram.com/Oluwasey1funm1" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2025 DataInsights Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true
+        });
+
+        // Create sample charts
+        function createCharts() {
+            // Revenue Chart
+            new Chart(document.getElementById('revenueChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Revenue',
+                        data: [65, 59, 80, 81, 56, 55],
+                        borderColor: '#0052cc',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Engagement Chart
+            new Chart(document.getElementById('engagementChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                    datasets: [{
+                        label: 'Active Users',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: '#0052cc'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Performance Chart
+            new Chart(document.getElementById('performanceChart'), {
+                type: 'radar',
+                data: {
+                    labels: ['Speed', 'Accuracy', 'Reliability', 'Efficiency', 'Coverage'],
+                    datasets: [{
+                        label: 'Current',
+                        data: [85, 90, 88, 87, 92],
+                        borderColor: '#0052cc',
+                        backgroundColor: 'rgba(0, 82, 204, 0.2)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+
+        // Initialize charts when the page loads
+        window.addEventListener('load', createCharts);
+    </script>
+</body>
+</html>
